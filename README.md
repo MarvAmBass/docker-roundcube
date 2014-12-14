@@ -42,7 +42,11 @@ Roundcube Site Settings
 
 * __ROUNDCUBE\_RELATIVE\_URL\_ROOT__
  * default: _/_ - you can chance that to whatever you want/need
- 
+* __ROUNDCUBE\_HSTS\_HEADERS\_ENABLE__
+ * default: not set - if set to any value the HTTP Strict Transport Security will be activated on SSL Channel
+* __ROUNDCUBE\_HSTS\_HEADERS\_ENABLE\_NO\_SUBDOMAINS__
+ * default: not set - if set together with __ROUNDCUBE\_HSTS\_HEADERS\_ENABLE__ and set to any value the HTTP Strict Transport Security will be deactivated on subdomains
+
 ### Inherited Variables
 
 * __DH\_SIZE__

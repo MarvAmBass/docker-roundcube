@@ -58,6 +58,24 @@ echo ">> set Timezone -> $ROUNDCUBE_PHP_DATE_TIMEZONE"
 sed -i "s!;date.timezone =.*!date.timezone = $ROUNDCUBE_PHP_DATE_TIMEZONE!g" /etc/php5/fpm/php.ini
 
 ###
+# Pre Install
+###
+
+if [ ! -z ${ROUNDCUBE_HSTS_HEADERS_ENABLE+x} ]
+then
+  echo ">> HSTS Headers enabled"
+  sed -i 's/#add_header Strict-Transport-Security/add_header Strict-Transport-Security/g' /etc/nginx/conf.d/nginx-roundcube.conf
+
+  if [ ! -z ${ROUNDCUBE_HSTS_HEADERS_ENABLE_NO_SUBDOMAINS+x} ]
+  then
+    echo ">> HSTS Headers configured without includeSubdomains"
+    sed -i 's/; includeSubdomains//g' /etc/nginx/conf.d/nginx-roundcube.conf
+  fi
+else
+  echo ">> HSTS Headers disabled"
+fi
+
+###
 # Install
 ###
 
