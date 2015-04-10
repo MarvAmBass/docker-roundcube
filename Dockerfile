@@ -3,7 +3,7 @@ MAINTAINER MarvAmBass
 
 ENV DH_SIZE 1024
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update; apt-get install -y \
     wget \
     php5-intl \
     php5-mcrypt \
@@ -14,14 +14,14 @@ RUN apt-get update && apt-get install -y \
 RUN php5enmod mcrypt
 
 # install roundcube
-RUN wget "http://sourceforge.net/projects/roundcubemail/files/latest/download" -O roundcubemail.tar.gz
-RUN tar xvf roundcubemail.tar.gz -C /
-RUN rm roundcubemail.tar.gz
-RUN mv /roundcube* /roundcube
+RUN wget "http://sourceforge.net/projects/roundcubemail/files/latest/download" -O roundcubemail.tar.gz && \
+    tar xvf roundcubemail.tar.gz -C / && \
+    rm roundcubemail.tar.gz; \
+    mv /roundcube* /roundcube
 
 # fix rights
-RUN chmod a+rw /roundcube/temp/
-RUN chmod a+rw /roundcube/logs/
+RUN chmod a+rw /roundcube/temp/; \
+    chmod a+rw /roundcube/logs/
 
 # add config
 ADD config.inc.php /roundcube/config/config.inc.php
